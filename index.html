@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabric Converter 64</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Press+Start+2P&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Russo One', sans-serif;
+        min-height: 100vh;
+        background: #1a1a2e;
+        background-image:
+              radial-gradient(circle at 20% 80%, rgba(255,0,0,0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(0,100,255,0.3) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(0,200,0,0.2) 0%, transparent 50%),
+              radial-gradient(circle at 90% 90%, rgba(255,200,0,0.3) 0%, transparent 50%);
+        padding: 20px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .container { max-width: 580px; width: 100%; }
+    .n64-logo { text-align: center; margin-bottom: 20px; }
+    .n64-logo h1 { font-family: 'Press Start 2P', cursive; font-size: 12px; color: #fff; letter-spacing: 2px; text-shadow: 2px 2px 0 #e60012, 4px 4px 0 #0066cc; }
+    .cartridge { background: linear-gradient(180deg, #3d3d3d 0%, #2a2a2a 50%, #1a1a1a 100%); border-radius: 20px 20px 8px 8px; padding: 8px; box-shadow: 0 8px 0 #111, 0 10px 20px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.1); }
+    .cartridge-top { height: 15px; background: linear-gradient(90deg, #e60012, #0066cc, #009e4f, #ffcc00); border-radius: 12px 12px 0 0; margin: -8px -8px 8px -8px; }
+    .screen { background: #000; border-radius: 8px; padding: 20px; border: 4px solid #444; box-shadow: inset 0 0 30px rgba(0,100,0,0.3); }
+    .title-bar { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 3px solid; border-image: linear-gradient(90deg, #e60012, #0066cc, #009e4f, #ffcc00) 1; }
+    .n64-btn { width: 20px; height: 20px; border-radius: 50%; border: none; box-shadow: 0 3px 0 rgba(0,0,0,0.5), inset 0 -2px 0 rgba(0,0,0,0.3); cursor: pointer; }
+    .btn-red { background: #e60012; } .btn-blue { background: #0066cc; } .btn-green { background: #009e4f; } .btn-yellow { background: #ffcc00; }
+    .title-bar h2 { font-family: 'Press Start 2P', cursive; font-size: 11px; color: #fff; text-shadow: 0 0 10px #0f0, 0 0 20px #0f0; animation: glow 2s ease-in-out infinite alternate; }
+    @keyframes glow { from { text-shadow: 0 0 10px #0f0, 0 0 20px #0f0; } to { text-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0; } }
+    .section { background: rgba(255,255,255,0.05); border: 3px solid; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+    .section-width { border-color: #e60012; } .section-weight { border-color: #0066cc; }
+    .section-title { font-family: 'Press Start 2P', cursive; font-size: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+    .section-width .section-title { color: #e60012; } .section-weight .section-title { color: #0066cc; }
+    .step { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-family: 'Russo One', sans-serif; color: #fff; box-shadow: 0 4px 0 rgba(0,0,0,0.4); }
+    .section-width .step { background: #e60012; } .section-weight .step { background: #0066cc; }
+    .input-group { display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-start; }
+    .text-input { font-family: 'Russo One', sans-serif; font-size: 22px; padding: 10px 15px; width: 110px; background: #111; border: 3px solid #444; border-radius: 8px; color: #0f0; text-shadow: 0 0 5px #0f0; }
+    .text-input:focus { outline: none; border-color: #0f0; box-shadow: 0 0 10px #0f0; }
+    .text-input::placeholder { color: #030; }
+    .radio-group { display: flex; flex-direction: column; gap: 8px; }
+    .radio-label { font-size: 14px; color: #aaa; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 12px; background: rgba(255,255,255,0.05); border-radius: 20px; border: 2px solid transparent; transition: all 0.2s; }
+    .radio-label:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .radio-label input[type="radio"] { accent-color: #ffcc00; width: 16px; height: 16px; }
+    .radio-label:has(input:checked) { border-color: #ffcc00; color: #ffcc00; }
+    .weight-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .option-box { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 10px; border: 2px solid #333; }
+    .option-box-title { font-family: 'Press Start 2P', cursive; font-siz<e!:D O7CpTxY;P Ec ohltomrl:> 
+                       #<6h6t6m;l >m
+                       a<rhgeiand->b
+                       o<tmteotma:  c1h0aprxs;e tl=e"tuttefr--8s"p>a
+                       c<imnegt:a  1npaxm;e =}"
+    v.ibeuwtptoornt-"r ocwo n{t ednits=p"lwaiyd:t hf=ldeexv;i cgea-pw:i d1t5hp,x ;i nmiatrigailn--sbcoatlteo=m1:. 02"0>p
+    x<;t ijtulset>iFfayb-rciocn tCeonntv:e rcteenrt e6r4;< /}t
+    i.tblten> 
+    {< sftoynlte->f
+     a@miimlpyo:r t' Ruursls(o' hOtntep's,: /s/afnosn-tsse.rgiofo;g lfeoanpti-ss.iczoem:/ c1s8sp2x?;f apmaidldyi=nRgu:s s1o5+pOxn e3&0fpaxm;i lbyo=rPdreers:s +nSotnaer;t +b2oPr&ddeirs-prlaadyi=ussw:a p3'0)p;x
+     ;*  c{u rmsaorrg:i np:o i0n;t epra;d dtienxgt:- t0r;a nbsofxo-rsmi:z iunpgp:e rbcoarsdee;r -lbeotxt;e r}-
+     sbpoadcyi n{g
+                 :   2fpoxn;t -tfraamnisliyt:i o'nR:u saslol  O0n.e1's,;  sbaonxs--ssheardiofw;:
+                   0  m6ipnx- h0e irgghbta:( 01,000,v0h,;0
+                                            . 4 )b;a c}k
+     g.rbotunn:da:c t#i1vae1 a{2 et;r
+                               a n sbfaocrkmg:r oturnadn-silmaatgeeY:(
+                               4 p x ) ;r abdoixa-ls-hgardaodwi:e n0t (2cpixr c0l er gabta (200,%0 ,800,%0,. 4r)g;b a}(
+     2.5b5t,n0-,c0o,n0v.e3r)t  0{% ,b atcrkagnrsopuanrde:n tl i5n0e%a)r,-
+                                 g r a d ireandti(a1l8-0gdreagd,i e#n0t0(ccci0r0c,l e# 0a0t9 98000%) ;2 0c%o,l orrg:b a#(f0f,f1;0 0t,e2x5t5-,s0h.a3d)o w0:% ,0  t2rpaxn s0p arrgebnat( 05,00%,)0,,
+                                 0 . 3 ) ;r a}d
+     i.ablt-ng-rcaodniveenrtt(:chiorvcelre  {a tb a5c0k%g r5o0u%n,d :r glbian(e0a,r2-0g0r,a0d,i0e.n2t)( 108%0,d etgr,a n#s0p0aeree0n0t,  5#00%0)b,b
+                                             0 0 ) ;  r}a
+     d.ibatln--grreasdeite n{t (bcaicrkcglreo uantd :9 0l%i n9e0a%r,- grrgabdai(e2n5t5(,128000d,e0g,,0 .#36)6 60,% ,# 4t4r4a)n;s pcaorleonrt:  5#0f%f)f;;
+                            } 
+     p.abdtdni-nrge:s e2t0:phxo;v
+     e r  d{i sbpalcakyg:r ofulnedx:;  lfilneexa-rd-igrreacdtiieonnt:( 1c8o0lduemgn,;  #a7l7i7g,n -#i5t5e5m)s;:  }c
+     e.nrteesru;l tjsu-ssteicftyi-ocno n{t ebnatc:k gcreonutnedr:; 
+                                         #}0
+                                         0.0c;o nbtoaridneerr:  {4 pmxa xs-owliiddt h#:0 0598e04pfx;;  bwoirddtehr:- r1a0d0i%u;s :} 
+                                                                 1.2np6x4;- lpoagdod i{n gt:e x1t5-paxl;i gbno:x -csehnatdeorw;:  m0a r0g i2n0-pbxo trtgobma:( 02,01p5x8;, 7}9
+                                                                                                                                                              ,.0n.634)-,l oignos eht1  0{  0f o3n0tp-xf armgiblay(:0 ,'1P5r8e,s7s9 ,S0t.a1r)t;  2}P
+                                                                                       '.,r ecsuurlstisv-et;i tfloen t{- sfioznet:- f1a2mpixl;y :c o'lPorre:s s# fSftfa;r tl e2tPt'e,r -csuprasciivneg;:  f2opnxt;- stiezxet:- s1h0apdxo;w :c o2lpoxr :2 p#x0 009 e#4ef6;0 0t1e2x,t -4aplxi g4np:x  c0e n#t0e0r6;6 cmca;r g}i
+                                         n.-cbaortttroimd:g e1 5{p xb;a ctkegxrto-usnhda:d olwi:n e0a r0- g1r0apdxi e#n0t0(91e840fd;e g},
+                                                                  .#r3eds3udl3td- r0o%w,  {# 2dai2sap2laa y5:0 %f,l e#x1;a 1aal1iag n1-0i0t%e)m;s :b ocrednetre-rr;a dgiaups::  1220ppxx;  2m0aprxg i8np-xb o8tptxo;m :p a8dpdxi;n gp:a d8dpixn;g :b o8xp-xs h1a2dpoxw;:  b0a c8kpgxr o0u n#d1:1 1r,g b0a (100,p1x5 82,07p9x, 0r.g1b)a;( 0b,o0r,d0e,r0-.r5a)d,i uisn:s e8tp x0;  2bpoxr d0e rr-glbeaf(t2:5 54,p2x5 5s,o2l5i5d, 0#.010)9;e 4}f
+                                                                 ;. c}a
+                                         r.trreisduglet--troopw .{h ihgehilgihgth:t  1{5 pbxa;c kbgarcokugnrdo:u nrdg:b al(i2n5e5a,r2-0g4r,a0d,i0e.n1t)(;9 0bdoergd,e r#-el6e0f0t1-2c,o l#o0r0:6 6#cfcf,c c#0000;9 e}4
+                                                                  f.,r e#sfuflctc-0i0n)p;u tb o{r dfeorn-tr-afdaimuisl:y :1 2'pRxu s1s2op xO n0e '0,;  smaanrsg-isne:r i-f8;p xf o-n8tp-xs i8zpex:  -280ppxx;;  }w
+                                                                  i.dstchr:e e9n0 p{x ;b apcakdgdrionugn:d :6 p#x0 0100;p xb;o rbdaecrk-grraoduinuds::  #80p0x0;;  pbaodrddienrg::  22p0xp xs;o lbiodr d#e0r0:9 e44pfx;  sboolridde r#-4r4a4d;i ubso:x -6sphxa;d ocwo:l oirn:s e#t0 f00 ;0  t3e0xptx- arlgibgan(:0 ,r1i0g0h,t0;, 0t.e3x)t;- s}h
+                                                                  a.dtoiwt:l e0- b0a r5 p{x  d#i0sfp0l;a y}:
+                                                                   .frleesxu;l ta-lriogwn.-hiitgehmlsi:g hcte n.treers;u ljtu-sitnipfuyt- c{o nbtoerndte:r -cceonltoerr:;  #gfafpc:c 0105;p xc;o lmoarr:g i#nf-fbcoct0t0o;m :t e2x0tp-xs;h apdaodwd:i n0g -0b o5tptxo m#:f f1c5cp0x0;;  b}o
+                                                                  r.dreers-ublott-tloamb:e l3 p{x  fsoonlti-ds;i zbeo:r d1e4rp-xi;m acgoel:o rl:i n#e0a0r9-eg4rfa;d i}e
+                                                                  n.tr(e9s0udletg-,r o#we.6h0i0g1h2l,i g#h0t0 6.6rcecs,u l#t0-0l9aeb4efl,  {# fcfoclco0r0:)  #1f;f c}c
+                                                                  0.0n;6 4}-
+                                         b.tfno o{t ewri d{t ht:e x2t0-paxl;i ghne:i gchetn:t e2r0;p xm;a rbgoirnd-etro-pr:a d2i0upsx:;  5f0o%n;t -bfoarmdielry::  n'oPnree;s sb oSxt-asrhta d2oPw':,  0c u3rpsxi v0e ;r gfboan(t0-,s0i,z0e,:0 .85p)x,;  icnosleotr :0  #-424p4x;  0} 
+                                                  r.gfboao(t0e,r0 ,s0p,a0n. 3{) ;d icsuprlsaoyr::  ipnoliinntee-rb;l o}c
+                                                  k.;b tann-irmeadt i{o nb:a crkagirnobuonwd :3 s# el6i0n0e1a2r;  i}n f.ibntint-eb;l u}e
+                                          @{k ebyafcrkagmreosu nrda:i n#b0o0w6 6{c c0;%  }{  .cbotlno-rg:r e#een6 0{0 1b2a;c k}g r2o5u%n d{:  c#o0l0o9re:4 f#;0 0}6 6.cbct;n -}y e5l0l%o w{  {c oblaocrk:g r#o0u0n9de:4 f#;f f}c c7050%;  {} 
+                                                                                           c.otliotrl:e -#bfafrc ch020 ;{  }f o1n0t0-%f a{m icloyl:o r':P r#ees6s0 0S1t2a;r t}  2}P
+                                                                                 '<,/ sctuyrlsei>v
+                                                                                 e<;/ hfeoandt>-
+                                                                                 s<ibzoed:y >1
+                                                                                 1<pdxi;v  ccollaosrs:= "#cfofnft;a itneexrt"->s
+                                                                                 h a d<odwi:v  0c l0a s1s0=p"xn 6#40-fl0o,g o0" >0< h210>pFxA B#R0IfC0 ;C OaNnViEmRaTtEiRo n6:4 <g/lho1w> <2/sd ieva>s
+                                                                                 e - i<nd-iovu tc liansfsi=n"ictaer tarlitdegren"a>t
+                                                                                 e ;   } 
+                                            <@dkievy fcrlaamsess= "gclaorwt r{i dfgreo-mt o{p "t>e<x/td-isvh>a
+                                            d o w :  <0d i0v  1c0lpaxs s#=0"fs0c,r e0e n0" >2
+                                            0 p x   # 0 f<0d;i v}  ctloa s{s =t"etxitt-lseh-abdaorw":> 
+                                                                           0   0   2 0 p x  <#b0uft0t,o n0  c0l a4s0sp=x" n#604f-0b,t n0  b0t n6-0rpexd "#>0<f/0b;u t}t o}n
+     >.
+     s e c t i o n   {< bbuatctkognr oculnads:s =r"gnb6a4(-2b5t5n, 2b5t5n,-2b5l5u,e0".>0<5/)b;u tbtoornd>e
+                      r :   3 p x   s o<lhi2d>;W EbIoGrHdTe rC-OrNaVdEiRuTs<:/ h122>p
+                      x ;   p a d d i n<gb:u t1t5opnx ;c lmaasrsg=i"nn-6b4o-tbttonm :b t1n5-pgxr;e e}n
+     ".>s<e/cbtuitotno-nw>i
+     d t h   {   b o r<dbeurt-tcoonl ocrl:a s#se=6"0n06142-;b t}n  .bstenc-tyieolnl-owwe"i>g<h/tb u{t tboonr>d
+                                                                                                    e r - c o l o<r/:d i#v0>0
+              6 6 c c ;   }<
+     f.osremc tniaomne-=t"iCtolnev e{r tfFoonrtm-"f>a
+     m i l y :   ' P r<edsisv  Sctlaarsts =2"Ps'e,c tciuorns isveec;t ifoonn-tw-isditzhe":> 
+     1 0 p x ;   m a r g i<nd-ibvo tctloams:s =1"5spexc;t idoins-ptliatyl:e "f>l<esxp;a na lcilgans-si=t"esmtse:p "c>e1n<t/esrp;a ng>a pF:A B1R0IpCx ;W I}D
+    T.Hs<e/cdtiivo>n
+    - w i d t h   . s e c<tdiiovn -ctliatslse= "{i ncpoulto-rg:r o#uep6"0>0
+    1 2 ;   }   . s e c t i o<ni-nwpeuitg htty p.es=e"ctteixotn"- tciltalses ={" tceoxlto-ri:n p#u0t0"6 6ncacm;e =}"
+    w.isdttehp"  {p lwaicdethho:l d2e8rp=x";6 0h"e>i
+    g h t :   2 8 p x ;   b o<rddievr -crlaadsisu=s":r a5d0i%o;- gdriosuppl"a>y
+    :   i n l i n e - f l e x ;  <allaibgenl- ictleamsss:= "creandtieor-;l ajbueslt"i>f<yi-ncpountt etnytp:e =c"ernatdeiro;"  fnoanmte-=s"iwzied:t h1_4upnxi;t "f ovnatl-ufea=m"iilny":  c'hReucskseod >O nIen'c,h essa<n/sl-asbeerli>f
+    ;   c o l o r :   # f f f ;  <bloaxb-eslh acdloaws:s =0" r4apdxi o0- lragbbeal("0>,<0i,n0p,u0t. 4t)y;p e}=
+    ".rsaedcitoi"o nn-awmied=t"hw i.dstthe_pu n{i tb"a cvkaglruoeu=n"dc:m "#>e 6C0e0n1t2i;m e}t e.rsse<c/tliaobne-lw>e
+    i g h t   . s t e p   {  <b/adcikvg>r
+                           o u n d :   # 0 0 6 6<c/cd;i v}>
+
+                           . i n p u t - g r<o/udpi v{> 
+      d i s p l a y :  <fdlievx ;c lfalsesx=-"wsreacpt:i ownr aspe;c tgiaopn:- w1e5ipgxh;t "a>l
+      i g n - i t e m s :  <fdlievx -csltaasrst=;" s}e
+                           c.ttieoxnt--tiintpluet" >{< sfpoannt -cflaamsisl=y":s t'eRpu"s>s2o< /Osnpea'n,>  sFaAnBsR-IsCe rWiEfI;G HfTo<n/td-isvi>z
+                           e :   2 2 p x ;   p a<dddiivn gc:l a1s0sp=x" i1n5ppuxt;- gwriodutph":> 
+                           1 1 0 p x ;   b a c k g r<oiunnpdu:t  #t1y1p1e;= "btoerxdte"r :c l3apsxs =s"otleixdt -#i4n4p4u;t "b onradmeer=-"rwaediiguhst:"  8pplxa;c echoollodre:r =#"05f.00;" >t
+                           e x t - s h a d o w :   0< d0i v5 pcxl a#s0sf=0";r a}d
+    i.ot-egxrto-uipn"p>u
+    t : f o c u s   {   o u t l i<nlea:b enlo ncel;a sbso=r"dreard-icoo-lloarb:e l#"0>f<0i;n pbuotx -tsyhpaed=o"wr:a d0i o0"  1n0apmxe =#"0wfe0i;g h}t
+    _.utneixtt"- ivnapluute:=:"polza"c echhoelcdkeerd >{  Ocuonlcoers:< /#l0a3b0e;l >}
+
+     . r a d i o - g r o u p   {< ldaibsepll acyl:a sfsl=e"xr;a dfiloe-xl-adbierle"c>t<iionnp:u tc otlyupmen=;" rgaadpi:o "8 pnxa;m e}=
+                                                        ".wreaidgihot-_luanbietl"  {v aflounet=-"sgimz"e>:  G1r4apmxs;< /cloalboerl:> 
+                                                        # a a a ;   d i s p l a y<:/ dfilve>x
+                                                        ;   a l i g n - i t e<m/sd:i vc>e
+                                                        n t e r ;   g a p :  <8dpixv;  ccluarssso=r":w epiogihntt-eorp;t ipoandsd"i>n
+                                                        g :   6 p x   1 2 p x ;  <bdaicvk gcrloausnsd=:" orpgtbiao(n2-5b5o,x2"5>5
+                                                        , 2 5 5 , 0 . 0 5 ) ;   b o r<ddeirv- rcaldaisuss=:" o2p0tpixo;n -bboorxd-etri:t l2ep"x> SsQoUlAiRdE <t/rdainvs>p
+                                                        a r e n t ;   t r a n s i t i<odni:v  acllla s0s.=2"sr;a d}i
+    o.-rgardoiuop-"l>a
+    b e l : h o v e r   {   b a c k g<rloaubnedl:  crlgabsas(=2"5r5a,d2i5o5-,l2a5b5e,l0".>1<)i;n pcuotl otry:p e#=f"frfa;d i}o
+    ". rnaadmieo=-"laarbeeal_ uinniptu"t [vtaylpuee==""rsaqdyiaor"d]"  {c haeccckeendt>- cpoelro rs:q  #yfafrcdc<0/0l;a bweild>t
+                                                                        h :   1 6 p x ;   h e i g h t :  <1l6apbxe;l  }c
+    l.arsasd=i"or-aldaiboe-ll:ahbaesl("i>n<piuntp:ucth etcykpeed=)" radio" name="area_unit" value="sqmeter"> per sq meter</label>
+                  </div>
+                </div>
+                <div class="option-box">
+                  <div class="option-box-title">LINEAR</div>
+                  <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="area_unit" value="linyard"> per lin yard</label>
+                    <label class="radio-label"><input type="radio" name="area_unit" value="linmeter"> per lin meter</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="button-row">
+              <button type="button" class="btn btn-convert" onclick="convert()">START!</button>
+              <button type="reset" class="btn btn-reset">RESET</button>
+            </div>
+            <div class="results-section">
+              <div class="results-title">RESULTS</div>
+              <div class="result-row highlight"><input type="text" class="result-input" id="oz_sq_yd" readonly><span class="result-label">oz/sq yard</span></div>
+              <div class="result-row"><input type="text" class="result-input" id="oz_lin_yd" readonly><span class="result-label">oz/lin yard</span></div>
+              <div class="result-row"><input type="text" class="result-input" id="gm_lin_yd" readonly><span class="result-label">g/lin yard</span></div>
+              <div class="result-row highlight"><input type="text" class="result-input" id="gm_sq_m" readonly><span class="result-label">GSM</span></div>
+              <div class="result-row"><input type="text" class="result-input" id="gm_lin_m" readonly><span class="result-label">g/lin meter</span></div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer"><span>PRESS START TO CONVERT</span></div>
+    </div>
+    <script>
+    function inchesToCm(i) { return i * 2.54; }
+    function yardsToMeters(y) { return y * 0.9144; }
+                               function metersToYards(m) { return m * 1.0936133; }
+                                                          function ouncesToGrams(o) { return o * 28.3495231; }
+                                                                                     function round(n, d) { d = d || 2; return Math.round(n * Math.pow(10, d)) / Math.pow(10, d); }
+
+                                                                                     function convert() {
+                                                                                         var f = document.forms['ConvertForm'];
+                                                                                         var cw = f.width_unit.value === 'in' ? inchesToCm(parseFloat(f.width.value) || 0) : parseFloat(f.width.value) || 0;
+                                                                                         var wm = cw / 100;
+                                                                                         var wv = parseFloat(f.weight.value) || 0;
+                                                                                         var wu = f.weight_unit.value;
+                                                                                         var au = f.area_unit.value;
+                                                                                         var fw;
+
+                                                                                         if (wu === 'gm') {
+                                                                                               if (au === 'linmeter') fw = (100 * wv) / cw;
+                                                                                               else if (au === 'linyard') fw = (100 * wv) / yardsToMeters(cw);
+                                                                                               else if (au === 'sqmeter') fw = wv;
+                                                                                               else if (au === 'sqyard') fw = metersToYards(metersToYards(wv));
+                                                                                         } else {
+                                                                                               if (au === 'linmeter') fw = ouncesToGrams((100 * wv) / cw);
+                                                                                               else if (au === 'linyard') fw = (100 * ouncesToGrams(wv)) / yardsToMeters(cw);
+                                                                                               else if (au === 'sqmeter') fw = ouncesToGrams(wv);
+                                                                                               else if (au === 'sqyard') fw = ouncesToGrams(metersToYards(metersToYards(wv)));
+                                                                                         }
+
+                                                                                         document.getElementById('gm_sq_m').value = round(fw, 1);
+                                                                                         document.getElementById('gm_lin_m').value = round(fw * wm, 1);
+                                                                                         document.getElementById('gm_lin_yd').value = round(fw * wm * 0.9144, 1);
+                                                                                         document.getElementById('oz_sq_yd').value = round(fw * 0.029493556, 1);
+                                                                                         document.getElementById('oz_lin_yd').value = round(fw * 0.035274 * wm * 0.9144, 1);
+                                                                                     }
+                                                                                     </script>
+                                                                                     </body>
+                                                                                     </html>
+  </style></title>
+  </head>
+</html>
